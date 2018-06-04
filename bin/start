@@ -90,7 +90,7 @@ fi
 # we can use more memory than we actually can. It defaults to giving us 300m but that still ends up going over the 512MB
 # limit for the dyno. Set a few other additional options to minimize memory usage as well.
 if [ -n "$HEROKU" ] && [ `ulimit -u` = 256 ]; then
-    JAVA_OPTS="$JAVA_OPTS -Xmx248m"                        # This seems to be the right amount that prevents the dyno from going over the quota
+    JAVA_OPTS="$JAVA_OPTS -Xmx224m"                        # This seems to be the right amount that prevents the dyno from going over the quota
     JAVA_OPTS="$JAVA_OPTS -XX:-UseGCOverheadLimit"         # Disable limit to amount of time spent in GC. Better slow than not working at all
     JAVA_OPTS="$JAVA_OPTS -XX:+UseConcMarkSweepGC"         # ConcMarkSweepGC seems to cause less OOM issues in my testing on low-mem Heroku envs
     JAVA_OPTS="$JAVA_OPTS -XX:+CMSClassUnloadingEnabled"   # Not 100% sure this does anything in Java 8 but if it does, we want to enable it
